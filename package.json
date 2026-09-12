@@ -1,0 +1,19 @@
+{
+  "name": "miniblog-api",
+  "version": "1.0.0",
+  "description": "API REST MiniBlog para DevSpark - PI2 SoyHenry",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^4.22.2",
+    "pg": "^8.23.0"
+  }
+}
