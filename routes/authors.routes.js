@@ -35,9 +35,6 @@ router.post('/', async (req, res, next) => {
     const newAuthor = await authorsService.createAuthor({ name, email, bio });
     res.status(201).json(newAuthor);
   } catch (err) {
-    if (err.code === '23505') {
-      return res.status(400).json({ error: 'El email ya está registrado' });
-    }
     next(err);
   }
 });
@@ -56,9 +53,6 @@ router.put('/:id', async (req, res, next) => {
     }
     res.status(200).json(updatedAuthor);
   } catch (err) {
-    if (err.code === '23505') {
-      return res.status(400).json({ error: 'El email ya está registrado' });
-    }
     next(err);
   }
 });

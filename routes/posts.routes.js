@@ -33,7 +33,6 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-
 router.post('/', async (req, res, next) => {
   const { title, content, author_id, published } = req.body;
 
@@ -45,9 +44,6 @@ router.post('/', async (req, res, next) => {
     const newPost = await postsService.createPost({ title, content, author_id, published });
     res.status(201).json(newPost);
   } catch (err) {
-    if (err.code === '23503') {
-      return res.status(400).json({ error: 'El author_id no existe' });
-    }
     next(err);
   }
 });
@@ -66,13 +62,9 @@ router.put('/:id', async (req, res, next) => {
     }
     res.status(200).json(updatedPost);
   } catch (err) {
-    if (err.code === '23503') {
-      return res.status(400).json({ error: 'El author_id no existe' });
-    }
     next(err);
   }
 });
-
 
 router.delete('/:id', async (req, res, next) => {
   try {
