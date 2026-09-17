@@ -9,5 +9,9 @@ export function errorHandler(err, req, res, next) {
     return res.status(409).json({ error: 'El author_id no existe' });
   }
 
+    if (err.code === '22P02') {
+    return res.status(400).json({ error: 'El id o valor enviado no tiene el formato correcto' });
+  }
+
   res.status(500).json({ error: 'Error interno del servidor' });
 }

@@ -31,6 +31,11 @@ router.post('/', async (req, res, next) => {
     return res.status(400).json({ error: 'name y email son obligatorios' });
   }
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'El email no tiene un formato válido' });
+  }
+
   try {
     const newAuthor = await authorsService.createAuthor({ name, email, bio });
     res.status(201).json(newAuthor);
@@ -44,6 +49,11 @@ router.put('/:id', async (req, res, next) => {
 
   if (!name || !email) {
     return res.status(400).json({ error: 'name y email son obligatorios' });
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'El email no tiene un formato válido' });
   }
 
   try {
