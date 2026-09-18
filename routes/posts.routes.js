@@ -3,6 +3,148 @@ import * as postsService from '../services/posts.service.js';
 
 const router = Router();
 
+/**
+ * @swagger
+ * /posts:
+ *   get:
+ *     summary: Obtener todos los posts
+ *     tags: [Posts]
+ *     responses:
+ *       200:
+ *         description: Lista de posts
+ */
+
+/**
+ * @swagger
+ * /posts/author/{authorId}:
+ *   get:
+ *     summary: Obtener todos los posts de un author específico
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: authorId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Lista de posts del author (puede estar vacía)
+ */
+
+/**
+ * @swagger
+ * /posts/{id}:
+ *   get:
+ *     summary: Obtener un post por id
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Post encontrado
+ *       404:
+ *         description: Post no encontrado
+ */
+
+/**
+ * @swagger
+ * /posts:
+ *   post:
+ *     summary: Crear un nuevo post
+ *     tags: [Posts]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - content
+ *               - author_id
+ *             properties:
+ *               title:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *               author_id:
+ *                 type: integer
+ *               published:
+ *                 type: boolean
+ *     responses:
+ *       201:
+ *         description: Post creado
+ *       400:
+ *         description: Datos inválidos o faltantes
+ *       409:
+ *         description: El author_id no existe
+ */
+
+/**
+ * @swagger
+ * /posts/{id}:
+ *   put:
+ *     summary: Actualizar un post existente
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - content
+ *               - author_id
+ *             properties:
+ *               title:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *               author_id:
+ *                 type: integer
+ *               published:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: Post actualizado
+ *       400:
+ *         description: Datos inválidos
+ *       404:
+ *         description: Post no encontrado
+ *       409:
+ *         description: El author_id no existe
+ */
+
+/**
+ * @swagger
+ * /posts/{id}:
+ *   delete:
+ *     summary: Eliminar un post
+ *     tags: [Posts]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       204:
+ *         description: Post eliminado
+ *       404:
+ *         description: Post no encontrado
+ */
+
 router.get('/', async (req, res, next) => {
   try {
     const posts = await postsService.getAllPosts();

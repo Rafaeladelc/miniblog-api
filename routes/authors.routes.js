@@ -3,6 +3,17 @@ import * as authorsService from '../services/authors.service.js';
 
 const router = Router();
 
+/**
+ * @swagger
+ * /authors:
+ *   get:
+ *     summary: Obtener todos los authors
+ *     tags: [Authors]
+ *     responses:
+ *       200:
+ *         description: Lista de authors
+ */
+
 router.get('/', async (req, res, next) => {
   try {
     const authors = await authorsService.getAllAuthors();
@@ -11,6 +22,114 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+
+/**
+ * @swagger
+ * /authors/{id}:
+ *   get:
+ *     summary: Obtener un author por id
+ *     tags: [Authors]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Author encontrado
+ *       404:
+ *         description: Author no encontrado
+ */
+
+/**
+ * @swagger
+ * /authors:
+ *   post:
+ *     summary: Crear un nuevo author
+ *     tags: [Authors]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - email
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               bio:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Author creado
+ *       400:
+ *         description: Datos inválidos o faltantes
+ *       409:
+ *         description: El email ya está registrado
+ */
+
+/**
+ * @swagger
+ * /authors/{id}:
+ *   put:
+ *     summary: Actualizar un author existente
+ *     tags: [Authors]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - email
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               bio:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Author actualizado
+ *       400:
+ *         description: Datos inválidos
+ *       404:
+ *         description: Author no encontrado
+ *       409:
+ *         description: El email ya está registrado
+ */
+
+/**
+ * @swagger
+ * /authors/{id}:
+ *   delete:
+ *     summary: Eliminar un author
+ *     tags: [Authors]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       204:
+ *         description: Author eliminado
+ *       404:
+ *         description: Author no encontrado
+ */
 
 router.get('/:id', async (req, res, next) => {
   try {
