@@ -6,6 +6,9 @@ export function errorHandler(err, req, res, next) {
   }
 
   if (err.code === '23503') {
+    if (err.constraint && err.constraint.includes('post_id')) {
+      return res.status(409).json({ error: 'El post_id no existe' });
+    }
     return res.status(409).json({ error: 'El author_id no existe' });
   }
 
