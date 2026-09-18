@@ -8,14 +8,14 @@ const options = {
       version: '1.0.0',
       description: 'API REST para gestionar authors y posts - Proyecto Integrador 2, SoyHenry Módulo 2 (DevSpark)',
     },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-        description: 'Servidor local',
-      },
+        servers: [
       {
         url: 'https://miniblog-api-production-c382.up.railway.app',
         description: 'Servidor de producción (Railway)',
+      },
+      {
+        url: 'http://localhost:3000',
+        description: 'Servidor local',
       },
     ],
   },
